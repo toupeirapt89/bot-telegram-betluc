@@ -4,28 +4,25 @@ from flask import Flask
 
 app = Flask(__name__)
 
-# As tuas credenciais diretas do Telegram
 TOKEN = "9121196229:AAHukP46GmYZO1vvJ8cdDYR38G2RQeCm4Ss"
 CHAT_ID = "5183459179"
 
-def send_telegram_message(message):
+@app.route('/')
+def home():
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
     payload = {
         "chat_id": CHAT_ID,
-        "text": message,
-        "parse_mode": "Markdown"
+        "text": "🚀 Bot @undergoalslucio_bot ligado e operacional com sucesso!"
     }
+    
     try:
         response = requests.post(url, json=payload)
-        print("Resposta do Telegram:", response.text)
+        resposta_texto = response.text
+        print("RESPOSTA DO TELEGRAM:", resposta_texto)
+        return f"Tentativa de envio feita! Resposta do Telegram: {resposta_texto}"
     except Exception as e:
-        print("Erro ao enviar mensagem:", e)
-
-@app.route('/')
-def home():
-    # Sempre que o site for aberto, dispara a mensagem para o Telegram
-    send_telegram_message("🚀 *Bot @undergoalslucio_bot ligado e operacional!*")
-    return "Bot de Apostas a funcionar e mensagem enviada com sucesso!"
+        print("ERRO:", str(e))
+        return f"Erro ao enviar: {str(e)}"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
