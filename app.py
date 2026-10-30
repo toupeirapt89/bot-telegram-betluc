@@ -4,7 +4,8 @@ from flask import Flask
 
 app = Flask(__name__)
 
-TOKEN = "9121196229:AAHukP46GmYZO1vvJ8cdDYR38G2RQeCm4Ss"
+# Token correto e atualizado do Telegram
+TOKEN = "9121196229:AAHacVcHrwJoG4e8kDTigzzPv180iPQ17Zk"
 CHAT_ID = "5183459179"
 
 @app.route('/')
