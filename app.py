@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-# Configurações do Telegram (podes alterar se necessário)
-TOKEN = os.environ.get("TELEGRAM_TOKEN", "7707328905:AAH47vYvjY0T7ZfN4G0ZfN4G0ZfN4G0ZfN4")
-CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "123456789")
+# Configurações do Telegram com os teus dados reais
+TOKEN = os.environ.get("TELEGRAM_TOKEN", "9121196229:AAHukP46GmYZO1vvJ8cdDYR38G2RQeCm4Ss")
+CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "5183459179")
 
 def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
