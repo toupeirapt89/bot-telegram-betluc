@@ -24,15 +24,14 @@ def send_telegram_message(message):
     except Exception as e:
         print("Erro ao enviar mensagem:", e)
 
+# Envia a mensagem de arranque mal o script arranca na nuvem
+send_telegram_message("🚀 *Bot @undergoalslucio_bot ligado e operacional!*")
+
 def check_matches():
-    # Mensagem de arranque enviada para o Telegram assim que o bot começa
-    send_telegram_message("🚀 *Bot @undergoalslucio_bot ligado e operacional!*")
-    
     while True:
         try:
             # Lógica de verificação de jogos e alertas de Under
             print("A verificar jogos...")
-            # Exemplo de alerta: send_telegram_message("⚽ Alerta Under 1.5 HT detectado!")
         except Exception as e:
             print("Erro no ciclo de verificação:", e)
         
