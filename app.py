@@ -2,13 +2,19 @@ import os
 import time
 import threading
 from flask import Flask
-from curl_cffi import requests as stealth_requests
+import requests
 
 app = Flask(__name__)
 
 # As tuas credenciais do Telegram
 TOKEN = "9121196229:AAHacVcHrwJoG4e8kDTigzzPv180iPQ17Zk"
 CHAT_ID = "5183459179"
+
+# Cabeçalhos para simular um browser real (Google Chrome) nas requisições
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept-Language": "pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+}
 
 def enviar_telegram(mensagem):
     """Envia o alerta formatado diretamente para o teu Telegram."""
@@ -19,7 +25,7 @@ def enviar_telegram(mensagem):
         "parse_mode": "Markdown"
     }
     try:
-        resposta = stealth_requests.post(url, json=payload, timeout=10)
+        resposta = requests.post(url, json=payload, timeout=10)
         return resposta.json()
     except Exception as e:
         print("Erro ao enviar para o Telegram:", str(e))
@@ -27,8 +33,8 @@ def enviar_telegram(mensagem):
 def motor_analise_24h_pre_live():
     """
     Motor de análise contínua (24/7) estritamente voltado para o PRÉ-LIVE global.
-    Usa raspagem camuflada para evitar bloqueios, cruza dados de equipas de todo o mundo 
-    (seniores, sub-escalões e feminino) e dispara o sinal cirúrgico.
+    Cruza dados de equipas de todo o mundo (seniores, sub-escalões e feminino) 
+    e dispara o sinal cirúrgico quando encontra o jogo ideal.
     """
     print(">>> Motor Pré-Live 24/7 a trabalhar em pleno!")
     
@@ -37,8 +43,7 @@ def motor_analise_24h_pre_live():
 
     while True:
         try:
-            # Exemplo de estrutura de recolha pré-live 
-            # (Aqui podes futuramente ligar os seletores/endpoints dos sites que monitorizares)
+            # Exemplo de estrutura de recolha pré-live
             jogos_pre_live = [
                 {
                     "id_jogo": "match_pre_exemplo_1",
@@ -79,7 +84,7 @@ def motor_analise_24h_pre_live():
 def home():
     return "Bot Pré-Live 24/7 a operar em pleno no Render! A monitorizar o mundo inteiro à espera de oportunidades Under 1.5 HT."
 
-# Iniciar o motor de 24h em segundo plano numa Thread separada assim que o Flask arranca
+# Iniciar o motor de 24h em segundo plano numa Thread separada
 if __name__ == "__main__":
     t = threading.Thread(target=motor_analise_24h_pre_live)
     t.daemon = True
