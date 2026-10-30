@@ -25,6 +25,9 @@ def send_telegram_message(message):
         print("Erro ao enviar mensagem:", e)
 
 def check_matches():
+    # Mensagem de arranque enviada para o Telegram assim que o bot começa
+    send_telegram_message("🚀 *Bot @undergoalslucio_bot ligado e operacional!*")
+    
     while True:
         try:
             # Lógica de verificação de jogos e alertas de Under
