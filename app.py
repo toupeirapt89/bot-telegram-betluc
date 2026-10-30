@@ -3,7 +3,6 @@ import time
 import threading
 import requests
 from flask import Flask
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -24,30 +23,12 @@ def send_telegram_message(message):
     except Exception as e:
         print("Erro ao enviar mensagem:", e)
 
-# Envia a mensagem de arranque mal o script arranca na nuvem
-send_telegram_message("🚀 *Bot @undergoalslucio_bot ligado e operacional!*")
-
-def check_matches():
-    while True:
-        try:
-            # Lógica de verificação de jogos e alertas de Under
-            print("A verificar jogos...")
-        except Exception as e:
-            print("Erro no ciclo de verificação:", e)
-        
-        # Intervalo de 60 segundos entre verificações
-        time.sleep(60)
-
 @app.route('/')
 def home():
-    return "Bot de Apostas a funcionar na nuvem!"
+    # Envia a mensagem de teste assim que alguém aceder ao site do Render
+    send_telegram_message("🚀 *Bot @undergoalslucio_bot ligado e operacional!*")
+    return "Bot de Apostas a funcionar e mensagem enviada para o Telegram!"
 
 if __name__ == "__main__":
-    # Inicia a thread de monitorização em segundo plano
-    t = threading.Thread(target=check_matches)
-    t.daemon = True
-    t.start()
-    
-    # Inicia o servidor Flask para o Render manter o serviço ativo
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
